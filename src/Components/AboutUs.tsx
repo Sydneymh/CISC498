@@ -67,11 +67,11 @@ export const AboutUs = () => {
                     <h6>Web Design Team</h6>
                     <hr></hr>
                     <b>
-                        Dina Dawood: <code>ddawood@udel.edu</code>
+                        Sydney Holland: <code>sydneymh@udel.edu</code>
                     </b>
                     <br></br>
                     <b>
-                        Sollen Gacon: <code>solgacon@udel.edu</code>
+                        Dina Dawood: <code>ddawood@udel.edu</code>
                     </b>
                     <br></br>
                     <b>
@@ -79,7 +79,7 @@ export const AboutUs = () => {
                     </b>
                     <br></br>
                     <b>
-                        Sydney Holland: <code>sydneymh@udel.edu</code>
+                        Solenn Gacon: <code>solgacon@udel.edu</code>
                     </b>
                     <br></br>
                     <b>
