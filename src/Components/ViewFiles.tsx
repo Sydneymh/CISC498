@@ -1,10 +1,12 @@
 /* eslint-disable no-extra-parens */
 import React, { useState } from "react";
+/*import { Link } from "react-route-dom";*/
 import {
     Button,
     Collapse,
     FormControl,
     InputGroup,
+    Modal,
     Table
 } from "react-bootstrap";
 // import { files } from "./FileData";
@@ -24,6 +26,24 @@ export const ViewFiles = ({ files, onDelete }: ViewFilesProps) => {
     const [open, setOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
 
+    //delete confirmation pop up
+    const [showModal, setShowModal] = useState(false);
+    const [selectedFile, setSelectedFile] = useState<string | null>(null);
+
+    //Function to delete button
+    const handleDeleteClick = (fileName: string) => {
+        setSelectedFile(fileName);
+        setShowModal(true);
+    };
+
+    //function to confirm the deletion of the file
+    const handleConfirmDelete = () => {
+        if (selectedFile) {
+            onDelete(selectedFile);
+        }
+        setShowModal(false);
+        setSelectedFile(null);
+    };
     // Handling Search Functionality:
     const filterFiles = files.filter((file) =>
         file.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -76,13 +96,31 @@ export const ViewFiles = ({ files, onDelete }: ViewFilesProps) => {
                             {filterFiles.length > 0 ? (
                                 filterFiles.map((file, index) => (
                                     <tr key={index}>
-                                        <td>{file.name}</td>
+                                        <td>
+                                            <a
+                                                href={"/files/${file.name}"}
+                                                target="_blank"
+                                                rel="noopener noreferer noreferrer"
+                                                style={{
+                                                    textDecoration: "none",
+                                                    color: "#007bff"
+                                                }}
+                                            >
+                                                {file.name}
+                                            </a>
+
+                                            {/*Alternative: Use <Link> for internal navigation */}
+
+                                            {/*<Link to={'/files/${file.name}'}
+                                            style= {{textDecoration:"none", color: "#007bff"}}>
+                                            {file.name} </Link> */}
+                                        </td>
                                         <td>
                                             <Button
                                                 variant="danger"
                                                 size="sm"
                                                 onClick={() =>
-                                                    onDelete(file.name)
+                                                    handleDeleteClick(file.name)
                                                 }
                                             >
                                                 Delete
@@ -104,6 +142,33 @@ export const ViewFiles = ({ files, onDelete }: ViewFilesProps) => {
                     </Table>
                 </div>
             </Collapse>
+            {/* Delete Confirmation Modal */}
+            <Modal Show={showModal} onHide={() => setShowModal(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title> Confirm Deletion</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {selectedFile && (
+                        <p>
+                            {" "}
+                            Are you sure you want to delete{" "}
+                            <strong> {selectedFile} </strong> ?
+                        </p>
+                    )}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button
+                        variant="secondary"
+                        onClick={() => setShowModal(false)}
+                    >
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleConfirmDelete}>
+                        {" "}
+                        Delete{" "}
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 };
