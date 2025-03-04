@@ -143,9 +143,9 @@ export const ViewFiles = ({ files, onDelete }: ViewFilesProps) => {
                 </div>
             </Collapse>
             {/* Delete Confirmation Modal */}
-            <Modal Show={showModal} onHide={() => setShowModal(false)} centered>
+            <Modal show={showModal} onHide={() => setShowModal(false)} centered>
                 <Modal.Header closeButton>
-                    <Modal.Title> Confirm Deletion</Modal.Title>
+                    <Modal.Title> Confirm Deletion </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {selectedFile && (
