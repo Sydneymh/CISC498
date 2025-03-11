@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
-import { Help } from "./Components/Help";
 import { ImportCSV } from "./Components/ImportCSV";
 import { ExportCSV } from "./Components/ExportCSV";
 import { Row, Col, Container } from "react-bootstrap";
 import { ViewFiles } from "./Components/ViewFiles";
-import { ContactUs } from "./Components/ContactUs";
 import { AboutUs } from "./Components/AboutUs";
 import { files as startFiles } from "./Components/FileData";
 
@@ -114,14 +112,6 @@ function App(): JSX.Element {
                             showExportfileModal={handleShowExportModal}
                             handleClose={handleCloseExportModal}
                         />
-                    </Col>
-                    <Col xs="auto">
-                        <div className="Help">
-                            <Help></Help>
-                        </div>
-                    </Col>
-                    <Col xs="auto">
-                        <ContactUs />
                     </Col>
                 </Row>
             </Container>
